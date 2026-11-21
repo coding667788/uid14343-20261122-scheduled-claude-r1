@@ -1,0 +1,40 @@
+{
+  "case_id": "demo-2026-11",
+  "template_cost": 6,
+  "fields": [
+    {"id": "case_summary", "costs": {"*": 1}},
+    {"id": "detail_status", "depends_on": ["category_tag"], "costs": {"*": 2, "AUD-East": 1}},
+    {"id": "category_tag", "costs": {"*": 1}},
+    {"id": "region_code", "costs": {"*": 1}},
+    {"id": "ledger_extract", "mutex_group": "fin", "costs": {"*": 3}},
+    {"id": "budget_extract", "mutex_group": "fin", "costs": {"*": 2}},
+    {"id": "subject_home_addr", "costs": {"*": 1}},
+    {"id": "subject_salary_band", "costs": {"*": 1}}
+  ],
+  "recipients": [
+    {
+      "id": "AUD-East",
+      "allowed_fields": ["case_summary", "detail_status", "category_tag", "region_code", "ledger_extract", "budget_extract"],
+      "obligations": [
+        [["detail_status"]],
+        [["ledger_extract"], ["budget_extract"]]
+      ]
+    },
+    {
+      "id": "AUD-West",
+      "allowed_fields": ["case_summary", "category_tag", "region_code", "budget_extract"],
+      "obligations": [
+        [["case_summary"]]
+      ]
+    },
+    {
+      "id": "REG-North",
+      "allowed_fields": ["case_summary", "category_tag", "region_code", "subject_home_addr", "subject_salary_band"],
+      "obligations": [
+        [["region_code"], ["category_tag"]]
+      ]
+    }
+  ],
+  "co_view_groups": [["AUD-East", "AUD-West"]],
+  "forbidden": [["subject_home_addr", "subject_salary_band"]]
+}

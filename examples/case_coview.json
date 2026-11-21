@@ -1,0 +1,15 @@
+{
+  "case_id": "demo-coview",
+  "template_cost": 0,
+  "fields": [
+    {"id": "alpha", "costs": {"*": 1}},
+    {"id": "beta", "costs": {"*": 1}},
+    {"id": "gamma", "costs": {"*": 1}}
+  ],
+  "recipients": [
+    {"id": "R1", "allowed_fields": ["alpha"], "obligations": [[["alpha"]]]},
+    {"id": "R2", "allowed_fields": ["beta", "gamma"], "obligations": [[["beta"], ["gamma"]]]}
+  ],
+  "co_view_groups": [["R1", "R2"]],
+  "forbidden": [["alpha", "beta"]]
+}

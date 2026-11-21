@@ -1,0 +1,6 @@
+{
+  "views": [
+    {"recipient": "R1", "fields": ["alpha"]},
+    {"recipient": "R2", "fields": ["beta"]}
+  ]
+}
